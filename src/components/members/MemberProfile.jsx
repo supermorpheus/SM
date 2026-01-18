@@ -99,13 +99,13 @@ function MemberProfile() {
             </span>
           </div>
 
-          <p className="profile-location">
+          <Link to={`/members?tag=${encodeURIComponent(member.livesIn)}`} className="profile-location profile-location-clickable">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
               <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
               <circle cx="12" cy="10" r="3"/>
             </svg>
             {member.livesIn}
-          </p>
+          </Link>
 
           {/* Tags */}
           {member.tags && member.tags.length > 0 && (
@@ -123,9 +123,8 @@ function MemberProfile() {
           )}
         </div>
 
-        {/* About Section */}
+        {/* Bio */}
         <div className="profile-section">
-          <h3 className="section-title">About</h3>
           <p className="profile-bio">{member.bio || member.introduction}</p>
         </div>
 
@@ -415,45 +414,6 @@ function MemberProfile() {
                 <polygon points="30,25 50,55 10,55" fill="rgba(255,255,255,0.25)"/>
                 <polygon points="30,40 55,75 5,75" fill="rgba(255,255,255,0.2)"/>
               </svg>
-            </div>
-          </div>
-        )}
-
-        {/* Videos Section */}
-        {member.hasVideos && (member.hasVideos.earlyLife || member.hasVideos.professionalLife || member.hasVideos.currentLife) && (
-          <div className="profile-section">
-            <h3 className="section-title">Story Videos</h3>
-            <div className="videos-grid">
-              {member.hasVideos.earlyLife && (
-                <div className="video-card">
-                  <div className="video-thumbnail">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-                      <polygon points="5 3 19 12 5 21 5 3"/>
-                    </svg>
-                  </div>
-                  <span className="video-label">Early Life</span>
-                </div>
-              )}
-              {member.hasVideos.professionalLife && (
-                <div className="video-card">
-                  <div className="video-thumbnail">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-                      <polygon points="5 3 19 12 5 21 5 3"/>
-                    </svg>
-                  </div>
-                  <span className="video-label">Professional</span>
-                </div>
-              )}
-              {member.hasVideos.currentLife && (
-                <div className="video-card">
-                  <div className="video-thumbnail">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-                      <polygon points="5 3 19 12 5 21 5 3"/>
-                    </svg>
-                  </div>
-                  <span className="video-label">Current Life</span>
-                </div>
-              )}
             </div>
           </div>
         )}

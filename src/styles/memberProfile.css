@@ -109,6 +109,16 @@
   font-size: 14px;
   color: var(--medium-gray);
   margin-bottom: 12px;
+  text-decoration: none;
+}
+
+.profile-location.profile-location-clickable {
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.profile-location.profile-location-clickable:hover {
+  color: var(--primary-green);
 }
 
 .profile-tags {
