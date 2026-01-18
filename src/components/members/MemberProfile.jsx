@@ -123,19 +123,76 @@ function MemberProfile() {
           )}
         </div>
 
-        {/* Currently Section */}
-        <div className="profile-section">
-          <h3 className="section-title">Currently</h3>
-          <div className="currently-card">
-            <p className="currently-role">{member.currentRole}</p>
-            <p className="currently-org">at {member.currentOrganization}</p>
-          </div>
-        </div>
-
         {/* About Section */}
         <div className="profile-section">
           <h3 className="section-title">About</h3>
           <p className="profile-bio">{member.bio || member.introduction}</p>
+        </div>
+
+        {/* Current Life Section */}
+        <div className="current-life-section">
+          <div className="section-header-with-icon">
+            <h3 className="section-title-large">Current Life</h3>
+            <div className="section-icon">
+              <svg width="24" height="24" viewBox="0 0 60 80" fill="none">
+                <circle cx="30" cy="10" r="6" fill="#648349"/>
+                <polygon points="30,20 45,45 15,45" fill="#648349" opacity="0.8"/>
+                <polygon points="30,35 50,65 10,65" fill="#648349" opacity="0.6"/>
+              </svg>
+            </div>
+          </div>
+          <div className="section-divider"></div>
+
+          {/* Video Thumbnail */}
+          {member.hasVideos?.currentLife && (
+            <div className="current-life-video">
+              <div className="video-preview">
+                <div className="video-placeholder">
+                  <svg className="play-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+                    <polygon points="5 3 19 12 5 21 5 3" fill="currentColor"/>
+                  </svg>
+                </div>
+                <span className="video-duration">3:12</span>
+              </div>
+            </div>
+          )}
+
+          {/* Tags */}
+          {member.tags && member.tags.length > 0 && (
+            <div className="current-life-tags">
+              {member.livesIn && (
+                <Link to={`/members?tag=${encodeURIComponent(member.livesIn.split(',')[0])}`} className="life-tag">
+                  {member.livesIn.split(',')[0]}
+                </Link>
+              )}
+              {member.tags.map((tag, index) => (
+                <Link
+                  key={index}
+                  to={`/members?tag=${encodeURIComponent(tag)}`}
+                  className="life-tag"
+                >
+                  {tag}
+                </Link>
+              ))}
+            </div>
+          )}
+
+          {/* Roles / Organizations */}
+          <div className="roles-section">
+            <p className="roles-label">Roles / Organizations</p>
+            <div className="role-badge">
+              {member.currentRole} / {member.currentOrganization}
+            </div>
+          </div>
+
+          {/* Current Life Summary */}
+          <div className="current-life-summary">
+            <p className="summary-label">Current Life Summary</p>
+            <p className="summary-text">
+              {member.bio?.substring(0, 100) || member.introduction?.substring(0, 100)}...
+            </p>
+            <button className="show-more-btn">Show More</button>
+          </div>
         </div>
 
         {/* Quote Card - Purple */}
