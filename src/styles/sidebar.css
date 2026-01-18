@@ -1,8 +1,8 @@
-/* Kebab Menu Button */
-.kebab-menu-btn {
+/* Hamburger Menu Button */
+.hamburger-menu-btn {
   position: fixed;
   top: 52px;
-  right: 16px;
+  left: 16px;
   width: 40px;
   height: 40px;
   display: flex;
@@ -18,12 +18,12 @@
   transition: background-color 0.2s, transform 0.2s;
 }
 
-.kebab-menu-btn:hover {
+.hamburger-menu-btn:hover {
   background-color: var(--light-gray);
   transform: scale(1.05);
 }
 
-.kebab-menu-btn:active {
+.hamburger-menu-btn:active {
   transform: scale(0.95);
 }
 
@@ -48,20 +48,20 @@
 .sidebar {
   position: fixed;
   top: 0;
-  right: -320px;
+  left: -320px;
   width: 300px;
   max-width: 85vw;
   height: 100vh;
   background-color: white;
   z-index: 999;
-  transition: right 0.3s ease-out;
+  transition: left 0.3s ease-out;
   display: flex;
   flex-direction: column;
-  box-shadow: -4px 0 20px rgba(0, 0, 0, 0.15);
+  box-shadow: 4px 0 20px rgba(0, 0, 0, 0.15);
 }
 
 .sidebar.sidebar-open {
-  right: 0;
+  left: 0;
 }
 
 /* Sidebar Header */
