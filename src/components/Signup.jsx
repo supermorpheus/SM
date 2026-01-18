@@ -39,8 +39,8 @@ function Signup() {
 
     // Mock signup - just log the data
     console.log('Signup attempt:', formData)
-    alert('Account created successfully! (Mock)')
-    navigate('/login')
+    // Navigate to onboarding after successful signup
+    navigate('/onboarding')
   }
 
   const handleGoogleSignup = () => {
