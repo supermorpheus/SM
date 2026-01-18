@@ -64,68 +64,48 @@ function MemberProfile() {
     <>
       <StatusBar />
       <div className="page-content profile-page">
-        {/* Header */}
-        <div className="profile-header">
-          <button className="back-btn" onClick={() => navigate(-1)}>
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              <path d="M19 12H5M12 19l-7-7 7-7"/>
+        {/* Top Bar - Status Badge + Profile Link */}
+        <div className="profile-top-bar">
+          <span className={`status-badge-pill ${getStatusBadgeClass(member.status)}`}>
+            {getStatusLabel(member.status)}
+          </span>
+          <button className="profile-link-btn" onClick={handleShare}>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <rect x="9" y="9" width="13" height="13" rx="2" ry="2"/>
+              <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
             </svg>
-          </button>
-          <button className="share-btn" onClick={handleShare}>
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              <circle cx="18" cy="5" r="3"/>
-              <circle cx="6" cy="12" r="3"/>
-              <circle cx="18" cy="19" r="3"/>
-              <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/>
-              <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/>
-            </svg>
+            Profile Link
           </button>
         </div>
 
-        {/* Profile Hero */}
-        <div className="profile-hero">
-          <div className="profile-avatar-large">
+        {/* Profile Hero - Name Left, Avatar Right */}
+        <div className="profile-hero-new">
+          <div className="profile-hero-content">
+            <h1 className="profile-name-large">{member.firstName} {member.lastName}</h1>
+          </div>
+          <div className="profile-avatar-hero">
             {member.profilePicture ? (
               <img src={member.profilePicture} alt={member.firstName} />
             ) : (
               <span>{getInitials(member.firstName, member.lastName)}</span>
             )}
           </div>
+        </div>
 
-          <div className="profile-name-section">
-            <h1 className="profile-name">{member.firstName} {member.lastName}</h1>
-            <span className={`status-badge ${getStatusBadgeClass(member.status)}`}>
-              {getStatusLabel(member.status)}
-            </span>
-          </div>
+        {/* Divider */}
+        <div className="profile-divider"></div>
 
-          <Link to={`/members?tag=${encodeURIComponent(member.livesIn)}`} className="profile-location profile-location-clickable">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
-              <circle cx="12" cy="10" r="3"/>
-            </svg>
-            {member.livesIn}
+        {/* Location */}
+        <div className="profile-location-row">
+          <span className="location-label">Lives in </span>
+          <Link to={`/members?tag=${encodeURIComponent(member.livesIn.split(',')[0].trim())}`} className="location-link">
+            {member.livesIn.split(',')[0].trim()}
           </Link>
-
-          {/* Tags */}
-          {member.tags && member.tags.length > 0 && (
-            <div className="profile-tags">
-              {member.tags.map((tag, index) => (
-                <Link
-                  key={index}
-                  to={`/members?tag=${encodeURIComponent(tag)}`}
-                  className="tag tag-clickable"
-                >
-                  {tag}
-                </Link>
-              ))}
-            </div>
-          )}
         </div>
 
         {/* Bio */}
-        <div className="profile-section">
-          <p className="profile-bio">{member.bio || member.introduction}</p>
+        <div className="profile-bio-section">
+          <p className="profile-bio-text">{member.bio || member.introduction}</p>
         </div>
 
         {/* Current Life Section */}
