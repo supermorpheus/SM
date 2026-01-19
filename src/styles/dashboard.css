@@ -419,3 +419,86 @@
   font-family: var(--font-secondary);
   font-size: 11px;
 }
+
+/* ==========================================
+   V2 Styles - Complete Profile & No Events
+   ========================================== */
+
+/* Profile Complete State */
+.profile-completion-card.profile-complete {
+  background: linear-gradient(135deg, #2d5016 0%, #4a6b35 100%);
+}
+
+.profile-completion-card.profile-complete .completion-header {
+  margin-bottom: 12px;
+}
+
+.profile-completion-card.profile-complete .completion-info h3 {
+  color: #90EE90;
+}
+
+.completion-badge-icon {
+  width: 48px;
+  height: 48px;
+  background-color: rgba(144, 238, 144, 0.2);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.completion-badge-icon svg {
+  stroke: #90EE90;
+}
+
+.super-badge {
+  background-color: rgba(144, 238, 144, 0.2);
+  color: #90EE90;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-family: var(--font-secondary);
+  font-size: 12px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+/* Empty Events State */
+.empty-events-card {
+  background-color: #f8f9fa;
+  border-radius: 16px;
+  padding: 32px 24px;
+  text-align: center;
+  border: 1px dashed var(--light-gray);
+}
+
+.empty-events-icon {
+  width: 64px;
+  height: 64px;
+  background-color: #e9ecef;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 16px;
+}
+
+.empty-events-icon svg {
+  stroke: var(--medium-gray);
+}
+
+.empty-events-title {
+  font-family: var(--font-primary);
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--dark-gray);
+  margin-bottom: 8px;
+}
+
+.empty-events-text {
+  font-family: var(--font-secondary);
+  font-size: 14px;
+  color: var(--medium-gray);
+  line-height: 1.4;
+}

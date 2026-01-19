@@ -3,6 +3,7 @@ import Login from './components/Login'
 import Signup from './components/Signup'
 import Onboarding from './components/onboarding/Onboarding'
 import Dashboard from './components/dashboard/Dashboard'
+import DashboardV2 from './components/dashboard/DashboardV2'
 import Members from './components/members/Members'
 import MemberProfile from './components/members/MemberProfile'
 import BusinessProfile from './components/members/BusinessProfile'
@@ -30,6 +31,7 @@ function App() {
             <Route path="/signup" element={<Signup />} />
             <Route path="/onboarding" element={<OnboardingWrapper />} />
             <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/dashboard-v2" element={<DashboardV2 />} />
             <Route path="/members" element={<Members />} />
             <Route path="/member/:id" element={<MemberProfile />} />
             <Route path="/business/:id" element={<BusinessProfile />} />
