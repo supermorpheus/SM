@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { Link, useSearchParams, useNavigate } from 'react-router-dom'
 import StatusBar from './StatusBar'
 import FloatingMenu from './FloatingMenu'
+import { members } from '../data/mockData'
 import '../styles/dashboard.css'
 
 function AISearchResults() {
@@ -11,6 +12,68 @@ function AISearchResults() {
   const [isSearching, setIsSearching] = useState(true)
   const [aiResults, setAiResults] = useState(null)
   const [newQuery, setNewQuery] = useState(query)
+
+  // Get members with businesses that have products
+  const membersWithProducts = members.filter(m => m.business && m.business.offerings)
+
+  // Mock community products based on search
+  const communityProducts = [
+    {
+      id: '1',
+      name: 'Artisan Coffee Beans',
+      business: 'Bean & Brew Co.',
+      price: '₹599',
+      memberPrice: '₹499',
+      image: 'https://images.unsplash.com/photo-1447933601403-0c6688de566e?w=400&h=300&fit=crop',
+      memberId: '2',
+      memberName: 'Rahul Sharma'
+    },
+    {
+      id: '2',
+      name: 'Cold Brew Kit',
+      business: 'Bean & Brew Co.',
+      price: '₹1,299',
+      memberPrice: '₹999',
+      image: 'https://images.unsplash.com/photo-1461023058943-07fcbe16d735?w=400&h=300&fit=crop',
+      memberId: '2',
+      memberName: 'Rahul Sharma'
+    },
+    {
+      id: '3',
+      name: 'Coffee Subscription Box',
+      business: 'Bean & Brew Co.',
+      price: '₹1,499/month',
+      memberPrice: '₹1,199/month',
+      image: 'https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=400&h=300&fit=crop',
+      memberId: '2',
+      memberName: 'Rahul Sharma'
+    }
+  ]
+
+  // People who might help
+  const helpfulPeople = [
+    {
+      id: '2',
+      name: 'Rahul Sharma',
+      role: 'Founder at Bean & Brew Co.',
+      expertise: 'Coffee expert, runs specialty coffee business',
+      avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop'
+    },
+    {
+      id: '3',
+      name: 'Ananya Patel',
+      role: 'Food & Beverage Consultant',
+      expertise: 'Worked with 50+ cafes across India',
+      avatar: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&h=100&fit=crop'
+    },
+    {
+      id: '5',
+      name: 'Vikram Singh',
+      role: 'Coffee Enthusiast',
+      expertise: 'Visited 200+ coffee shops, writes reviews',
+      avatar: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop'
+    }
+  ]
 
   useEffect(() => {
     if (!query) {
@@ -30,31 +93,22 @@ function AISearchResults() {
         suggestions: [
           {
             type: 'recommendation',
-            title: 'Hotel & Stay Recommendations',
-            content: 'Rahul mentioned staying at "The Hideaway Resort" in Da Nang - said it was amazing value. Priya recommended "Little Hoi An Boutique" for its authentic experience.',
-            source: 'Travel Enthusiasts Group',
-            date: '2 weeks ago',
+            title: 'Community Recommendation',
+            content: 'Rahul from Bean & Brew mentioned their single-origin Ethiopian beans are great for pour-over. Priya said their cold brew concentrate is perfect for summers.',
+            source: 'Foodies of Gang 360',
+            date: '1 week ago',
             memberAvatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop'
           },
           {
             type: 'tip',
             title: 'Local Tips',
-            content: 'Vikram shared that booking through Agoda gets better rates than direct. Also, avoid tourist areas in Hanoi Old Quarter for accommodation.',
-            source: 'Gang Travel Tips',
-            date: '1 month ago',
+            content: 'Vikram shared that Third Wave Coffee in Indiranagar has the best ambiance. Blue Tokai in Koramangala for working. Dyu Art Cafe for dates!',
+            source: 'Bangalore Explorers',
+            date: '2 weeks ago',
             memberAvatar: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop'
-          },
-          {
-            type: 'contact',
-            title: 'Community Connection',
-            content: 'Ananya lived in Vietnam for 2 years and offered to help anyone planning a trip. You could reach out to her directly!',
-            source: 'Community Introductions',
-            date: '3 weeks ago',
-            memberAvatar: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&h=100&fit=crop',
-            memberId: '3'
           }
         ],
-        relatedQueries: ['Best restaurants in Vietnam', 'Vietnam visa process', 'Vietnam travel itinerary']
+        relatedQueries: ['Best cafes to work from', 'Coffee subscription services', 'Specialty coffee beans']
       }
 
       setAiResults(mockResults)
@@ -73,6 +127,10 @@ function AISearchResults() {
   const handleRelatedSearch = (q) => {
     setNewQuery(q)
     navigate(`/ai-search?q=${encodeURIComponent(q)}`)
+  }
+
+  const getInitials = (name) => {
+    return name.split(' ').map(n => n[0]).join('')
   }
 
   return (
@@ -158,6 +216,62 @@ function AISearchResults() {
                   )}
                 </div>
               ))}
+            </div>
+
+            {/* Community Products Section */}
+            <div className="community-products-section">
+              <h3 className="section-title-sm">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <rect x="2" y="7" width="20" height="14" rx="2" ry="2"/>
+                  <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/>
+                </svg>
+                From Community Businesses
+              </h3>
+              <div className="products-scroll">
+                {communityProducts.map((product) => (
+                  <Link key={product.id} to={`/member/${product.memberId}`} className="product-card-mini">
+                    <div className="product-image-mini">
+                      <img src={product.image} alt={product.name} />
+                    </div>
+                    <div className="product-info-mini">
+                      <span className="product-name-mini">{product.name}</span>
+                      <span className="product-business-mini">{product.business}</span>
+                      <div className="product-prices-mini">
+                        <span className="member-price">{product.memberPrice}</span>
+                        <span className="regular-price">{product.price}</span>
+                      </div>
+                    </div>
+                  </Link>
+                ))}
+              </div>
+            </div>
+
+            {/* People Who Might Help Section */}
+            <div className="helpful-people-section">
+              <h3 className="section-title-sm">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                  <circle cx="9" cy="7" r="4"/>
+                  <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+                  <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                </svg>
+                People who might help
+              </h3>
+              <div className="helpful-people-list">
+                {helpfulPeople.map((person) => (
+                  <Link key={person.id} to={`/member/${person.id}`} className="helpful-person-card">
+                    <img src={person.avatar} alt={person.name} className="helpful-person-avatar" />
+                    <div className="helpful-person-info">
+                      <span className="helpful-person-name">{person.name}</span>
+                      <span className="helpful-person-role">{person.role}</span>
+                      <span className="helpful-person-expertise">{person.expertise}</span>
+                    </div>
+                    <svg className="chevron-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                      <polyline points="9 18 15 12 9 6"/>
+                    </svg>
+                  </Link>
+                ))}
+              </div>
             </div>
 
             <div className="related-queries">
