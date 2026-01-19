@@ -109,7 +109,8 @@ export const members = [
         { name: 'Annual Maintenance', regularPrice: '₹12,000', memberPrice: '₹8,000' }
       ],
       memberDiscount: '15-20% off for Gang members',
-      contactVia: 'whatsapp'
+      contactVia: 'whatsapp',
+      coFounderIds: ['member-004'] // Vikram is co-founder
     },
     twitter: 'https://twitter.com/rahulverma_green',
     linkedin: 'https://linkedin.com/in/rahulverma',

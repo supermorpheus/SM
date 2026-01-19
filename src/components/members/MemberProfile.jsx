@@ -166,6 +166,53 @@ function MemberProfile() {
                 </svg>
                 Contact on WhatsApp
               </a>
+
+              {/* Founders Section - at bottom */}
+              <div className="business-founders">
+                <h4 className="founders-title">
+                  {member.business.coFounderIds?.length > 0 ? 'Founders' : 'Founder'}
+                </h4>
+                <div className="founders-list">
+                  {/* Current member (primary founder) */}
+                  <div className="founder-card">
+                    <div className="founder-avatar">
+                      {member.profilePicture ? (
+                        <img src={member.profilePicture} alt={member.firstName} />
+                      ) : (
+                        <span>{member.firstName.charAt(0)}{member.lastName.charAt(0)}</span>
+                      )}
+                    </div>
+                    <div className="founder-info">
+                      <span className="founder-name">{member.firstName} {member.lastName}</span>
+                      <span className="founder-role">{member.currentRole}</span>
+                    </div>
+                  </div>
+
+                  {/* Co-founders */}
+                  {member.business.coFounderIds?.map(coFounderId => {
+                    const coFounder = members.find(m => m.id === coFounderId)
+                    if (!coFounder) return null
+                    return (
+                      <Link key={coFounderId} to={`/member/${coFounderId}`} className="founder-card founder-card-link">
+                        <div className="founder-avatar">
+                          {coFounder.profilePicture ? (
+                            <img src={coFounder.profilePicture} alt={coFounder.firstName} />
+                          ) : (
+                            <span>{coFounder.firstName.charAt(0)}{coFounder.lastName.charAt(0)}</span>
+                          )}
+                        </div>
+                        <div className="founder-info">
+                          <span className="founder-name">{coFounder.firstName} {coFounder.lastName}</span>
+                          <span className="founder-role">{coFounder.currentRole}</span>
+                        </div>
+                        <svg className="founder-link-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                          <polyline points="9 18 15 12 9 6"/>
+                        </svg>
+                      </Link>
+                    )
+                  })}
+                </div>
+              </div>
             </div>
           </div>
         )}
