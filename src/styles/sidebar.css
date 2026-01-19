@@ -1,6 +1,6 @@
 /* Hamburger Menu Button */
 .hamburger-menu-btn {
-  position: fixed;
+  position: absolute;
   top: 52px;
   left: 16px;
   width: 40px;
@@ -29,7 +29,7 @@
 
 /* Sidebar Overlay */
 .sidebar-overlay {
-  position: fixed;
+  position: absolute;
   top: 0;
   left: 0;
   right: 0;
@@ -46,12 +46,12 @@
 
 /* Sidebar */
 .sidebar {
-  position: fixed;
+  position: absolute;
   top: 0;
   left: -320px;
   width: 300px;
   max-width: 85vw;
-  height: 100vh;
+  height: 100%;
   background-color: white;
   z-index: 999;
   transition: left 0.3s ease-out;
