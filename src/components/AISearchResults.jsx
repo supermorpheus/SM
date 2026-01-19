@@ -229,7 +229,7 @@ function AISearchResults() {
               </h3>
               <div className="products-scroll">
                 {communityProducts.map((product) => (
-                  <Link key={product.id} to={`/member/${product.memberId}`} className="product-card-mini">
+                  <Link key={product.id} to={`/business/${product.memberId}`} className="product-card-mini">
                     <div className="product-image-mini">
                       <img src={product.image} alt={product.name} />
                     </div>
