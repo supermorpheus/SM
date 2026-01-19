@@ -222,6 +222,8 @@
   align-items: center;
   gap: 8px;
   min-width: 70px;
+  text-decoration: none;
+  color: inherit;
 }
 
 .new-member-avatar {

@@ -47,7 +47,7 @@ function DashboardV2() {
           </div>
           <div className="new-members-scroll">
             {newMembers.map((member) => (
-              <div key={member.id} className="new-member-card">
+              <Link key={member.id} to={`/member/${member.id}`} className="new-member-card">
                 <div className="new-member-avatar">
                   {member.profilePicture ? (
                     <img src={member.profilePicture} alt={member.firstName} />
@@ -57,7 +57,7 @@ function DashboardV2() {
                   <span className={`member-status-dot ${getStatusBadgeClass(member.status)}`} />
                 </div>
                 <span className="new-member-name">{member.firstName}</span>
-              </div>
+              </Link>
             ))}
           </div>
         </div>
