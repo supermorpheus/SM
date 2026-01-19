@@ -63,16 +63,47 @@
 }
 
 /* ==========================================
-   Detail Page - Hamburger Menu Styles
+   Menu Wrapper - Contains both states
    ========================================== */
 
-.floating-menu-container {
+.floating-menu-wrapper {
   position: absolute;
   bottom: 0;
   left: 0;
   right: 0;
   z-index: 9999;
   pointer-events: none;
+}
+
+/* Full Dock - visible by default */
+.floating-dock.floating-dock-full {
+  pointer-events: auto;
+  opacity: 1;
+  transform: translateX(-50%) scale(1);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.floating-dock.floating-dock-full.hidden {
+  opacity: 0;
+  transform: translateX(-50%) scale(0.8);
+  pointer-events: none;
+}
+
+/* Hamburger Container - hidden by default */
+.hamburger-container {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  opacity: 0;
+  transform: scale(0.8);
+  pointer-events: none;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.hamburger-container.visible {
+  opacity: 1;
+  transform: scale(1);
+  pointer-events: auto;
 }
 
 /* Backdrop */
@@ -87,7 +118,7 @@
   pointer-events: auto;
 }
 
-/* Hamburger Button - Bottom Right (Detail Pages) */
+/* Hamburger Button - Bottom Right */
 .hamburger-btn {
   position: absolute;
   bottom: 20px;
@@ -186,6 +217,14 @@
     right: 16px;
     transform: none;
     justify-content: space-around;
+  }
+
+  .floating-dock.floating-dock-full {
+    transform: scale(1);
+  }
+
+  .floating-dock.floating-dock-full.hidden {
+    transform: scale(0.8);
   }
 
   .dock-item {

@@ -99,16 +99,32 @@ function FloatingMenu() {
     }
   ]
 
-  // On detail pages OR collapsed state, show hamburger menu
-  if (isDetailPage || isCollapsed) {
-    return (
-      <div className="floating-menu-container">
-        {/* Backdrop */}
-        {isOpen && (
-          <div className="menu-backdrop" onClick={() => setIsOpen(false)} />
-        )}
+  // Determine if we should show collapsed/hamburger state
+  const showCollapsed = isDetailPage || isCollapsed
 
-        {/* Expanded Menu */}
+  return (
+    <div className={`floating-menu-wrapper ${showCollapsed ? 'collapsed' : ''}`}>
+      {/* Backdrop - only when hamburger menu is open */}
+      {showCollapsed && isOpen && (
+        <div className="menu-backdrop" onClick={() => setIsOpen(false)} />
+      )}
+
+      {/* Full Dock - fades out when collapsed */}
+      <nav className={`floating-dock floating-dock-full ${showCollapsed ? 'hidden' : ''}`}>
+        {menuItems.map((item) => (
+          <Link
+            key={item.path}
+            to={item.path}
+            className={`dock-item ${isActive(item.path) ? 'active' : ''}`}
+          >
+            <span className="dock-icon">{item.icon}</span>
+            <span className="dock-label">{item.label}</span>
+          </Link>
+        ))}
+      </nav>
+
+      {/* Hamburger Menu - fades in when collapsed */}
+      <div className={`hamburger-container ${showCollapsed ? 'visible' : ''}`}>
         <nav className={`floating-dock floating-dock-expandable ${isOpen ? 'open' : ''}`}>
           {menuItems.map((item) => (
             <Link
@@ -123,7 +139,6 @@ function FloatingMenu() {
           ))}
         </nav>
 
-        {/* Hamburger Button */}
         <button
           className={`hamburger-btn ${isOpen ? 'open' : ''}`}
           onClick={() => setIsOpen(!isOpen)}
@@ -133,23 +148,7 @@ function FloatingMenu() {
           <span className="hamburger-line"></span>
         </button>
       </div>
-    )
-  }
-
-  // On regular pages, show full dock
-  return (
-    <nav className="floating-dock">
-      {menuItems.map((item) => (
-        <Link
-          key={item.path}
-          to={item.path}
-          className={`dock-item ${isActive(item.path) ? 'active' : ''}`}
-        >
-          <span className="dock-icon">{item.icon}</span>
-          <span className="dock-label">{item.label}</span>
-        </Link>
-      ))}
-    </nav>
+    </div>
   )
 }
 
