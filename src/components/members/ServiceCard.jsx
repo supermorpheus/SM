@@ -20,7 +20,7 @@ function ServiceCard({ member }) {
   }
 
   return (
-    <Link to={`/member/${member.id}`} className="service-card">
+    <Link to={`/business/${member.id}`} className="service-card">
       <div className="service-card-header">
         <div className="service-info">
           <h3 className="service-name">{business.name}</h3>
