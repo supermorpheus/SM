@@ -1,8 +1,10 @@
+import { useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import '../styles/floatingMenu.css'
 
 function FloatingMenu() {
   const location = useLocation()
+  const [isOpen, setIsOpen] = useState(false)
 
   // Check if we're on a detail page (member or business)
   const isDetailPage = location.pathname.startsWith('/member/') ||
@@ -58,14 +60,51 @@ function FloatingMenu() {
     }
   ]
 
+  // On detail pages, show hamburger menu
+  if (isDetailPage) {
+    return (
+      <div className="floating-menu-container">
+        {/* Backdrop */}
+        {isOpen && (
+          <div className="menu-backdrop" onClick={() => setIsOpen(false)} />
+        )}
+
+        {/* Expanded Menu */}
+        <nav className={`floating-dock floating-dock-expandable ${isOpen ? 'open' : ''}`}>
+          {menuItems.map((item) => (
+            <Link
+              key={item.path}
+              to={item.path}
+              className={`dock-item ${isActive(item.path) ? 'active' : ''}`}
+              onClick={() => setIsOpen(false)}
+            >
+              <span className="dock-icon">{item.icon}</span>
+              <span className="dock-label">{item.label}</span>
+            </Link>
+          ))}
+        </nav>
+
+        {/* Hamburger Button */}
+        <button
+          className={`hamburger-btn ${isOpen ? 'open' : ''}`}
+          onClick={() => setIsOpen(!isOpen)}
+        >
+          <span className="hamburger-line"></span>
+          <span className="hamburger-line"></span>
+          <span className="hamburger-line"></span>
+        </button>
+      </div>
+    )
+  }
+
+  // On regular pages, show full dock
   return (
-    <nav className={`floating-dock ${isDetailPage ? 'collapsed' : ''}`}>
+    <nav className="floating-dock">
       {menuItems.map((item) => (
         <Link
           key={item.path}
           to={item.path}
           className={`dock-item ${isActive(item.path) ? 'active' : ''}`}
-          title={isDetailPage ? item.label : undefined}
         >
           <span className="dock-icon">{item.icon}</span>
           <span className="dock-label">{item.label}</span>
