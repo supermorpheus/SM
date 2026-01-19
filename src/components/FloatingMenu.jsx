@@ -5,66 +5,15 @@ import '../styles/floatingMenu.css'
 function FloatingMenu() {
   const location = useLocation()
   const [isOpen, setIsOpen] = useState(false)
-  const [isCollapsed, setIsCollapsed] = useState(false)
 
   // Check if we're on a detail page (member or business)
   const isDetailPage = location.pathname.startsWith('/member/') ||
                        location.pathname.startsWith('/business/')
 
-  // Check if we're on the community/members page
-  const isCommunityPage = location.pathname === '/members'
-
-  // Scroll detection for community page
-  useEffect(() => {
-    if (!isCommunityPage) {
-      setIsCollapsed(isDetailPage)
-      return
-    }
-
-    const handleScroll = () => {
-      const pageContent = document.querySelector('.page-content')
-      if (!pageContent) return
-
-      const scrollTop = pageContent.scrollTop
-      const scrollHeight = pageContent.scrollHeight
-      const clientHeight = pageContent.clientHeight
-
-      // Check if near bottom (within 150px)
-      const nearBottom = scrollTop + clientHeight >= scrollHeight - 150
-      setIsCollapsed(nearBottom)
-    }
-
-    const pageContent = document.querySelector('.page-content')
-    if (pageContent) {
-      pageContent.addEventListener('scroll', handleScroll)
-      handleScroll()
-    }
-
-    return () => {
-      if (pageContent) {
-        pageContent.removeEventListener('scroll', handleScroll)
-      }
-    }
-  }, [isCommunityPage, isDetailPage, location.pathname])
-
-  // Set collapsed state for detail pages
-  useEffect(() => {
-    if (isDetailPage) {
-      setIsCollapsed(true)
-    }
-  }, [isDetailPage])
-
-  // Reset isOpen when switching pages or collapsing
+  // Reset isOpen when switching pages
   useEffect(() => {
     setIsOpen(false)
   }, [location.pathname])
-
-  // Close menu when collapsing
-  useEffect(() => {
-    if (!isCollapsed) {
-      setIsOpen(false)
-    }
-  }, [isCollapsed])
 
   const isActive = (path) => {
     if (path === '/dashboard') {
@@ -116,53 +65,57 @@ function FloatingMenu() {
     }
   ]
 
-  const handleHamburgerClick = () => {
-    setIsOpen(!isOpen)
+  // On detail pages, show hamburger menu
+  if (isDetailPage) {
+    return (
+      <div className="floating-menu-container">
+        {/* Backdrop */}
+        {isOpen && (
+          <div className="menu-backdrop" onClick={() => setIsOpen(false)} />
+        )}
+
+        {/* Expanded Menu */}
+        <nav className={`floating-dock floating-dock-expandable ${isOpen ? 'open' : ''}`}>
+          {menuItems.map((item) => (
+            <Link
+              key={item.path}
+              to={item.path}
+              className={`dock-item ${isActive(item.path) ? 'active' : ''}`}
+              onClick={() => setIsOpen(false)}
+              title={item.label}
+            >
+              <span className="dock-icon">{item.icon}</span>
+            </Link>
+          ))}
+        </nav>
+
+        {/* Hamburger Button */}
+        <button
+          className={`hamburger-btn ${isOpen ? 'open' : ''}`}
+          onClick={() => setIsOpen(!isOpen)}
+        >
+          <span className="hamburger-line"></span>
+          <span className="hamburger-line"></span>
+          <span className="hamburger-line"></span>
+        </button>
+      </div>
+    )
   }
 
-  const handleItemClick = () => {
-    if (isCollapsed) {
-      setIsOpen(false)
-    }
-  }
-
-  const handleBackdropClick = () => {
-    setIsOpen(false)
-  }
-
+  // On regular pages, show full dock
   return (
-    <div className={`floating-menu-wrapper ${isCollapsed ? 'collapsed' : ''}`}>
-      {/* Backdrop for collapsed menu */}
-      {isCollapsed && isOpen && (
-        <div className="menu-backdrop" onClick={handleBackdropClick} />
-      )}
-
-      {/* Main Dock */}
-      <nav className={`floating-dock ${isCollapsed ? 'dock-collapsed' : ''} ${isOpen ? 'dock-open' : ''}`}>
-        {menuItems.map((item) => (
-          <Link
-            key={item.path}
-            to={item.path}
-            className={`dock-item ${isActive(item.path) ? 'active' : ''}`}
-            onClick={handleItemClick}
-            title={isCollapsed ? item.label : undefined}
-          >
-            <span className="dock-icon">{item.icon}</span>
-            <span className="dock-label">{item.label}</span>
-          </Link>
-        ))}
-      </nav>
-
-      {/* Hamburger Button - Only visible when collapsed */}
-      <button
-        className={`hamburger-btn ${isOpen ? 'open' : ''}`}
-        onClick={handleHamburgerClick}
-      >
-        <span className="hamburger-line"></span>
-        <span className="hamburger-line"></span>
-        <span className="hamburger-line"></span>
-      </button>
-    </div>
+    <nav className="floating-dock">
+      {menuItems.map((item) => (
+        <Link
+          key={item.path}
+          to={item.path}
+          className={`dock-item ${isActive(item.path) ? 'active' : ''}`}
+        >
+          <span className="dock-icon">{item.icon}</span>
+          <span className="dock-label">{item.label}</span>
+        </Link>
+      ))}
+    </nav>
   )
 }
 
