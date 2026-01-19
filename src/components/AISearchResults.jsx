@@ -20,57 +20,57 @@ function AISearchResults() {
   const communityProducts = [
     {
       id: '1',
-      name: 'Artisan Coffee Beans',
-      business: 'Bean & Brew Co.',
-      price: '₹599',
-      memberPrice: '₹499',
-      image: 'https://images.unsplash.com/photo-1447933601403-0c6688de566e?w=400&h=300&fit=crop',
-      memberId: '2',
-      memberName: 'Rahul Sharma'
+      name: 'Weekly Meal Kit',
+      business: 'FoodTech Labs',
+      price: '₹1,999',
+      memberPrice: '₹1,599',
+      image: 'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=400&h=300&fit=crop',
+      memberId: 'member-007',
+      memberName: 'Sneha Gupta'
     },
     {
       id: '2',
-      name: 'Cold Brew Kit',
-      business: 'Bean & Brew Co.',
-      price: '₹1,299',
-      memberPrice: '₹999',
-      image: 'https://images.unsplash.com/photo-1461023058943-07fcbe16d735?w=400&h=300&fit=crop',
-      memberId: '2',
-      memberName: 'Rahul Sharma'
+      name: 'Monthly Subscription',
+      business: 'FoodTech Labs',
+      price: '₹5,999/month',
+      memberPrice: '₹4,799/month',
+      image: 'https://images.unsplash.com/photo-1490645935967-10de6ba17061?w=400&h=300&fit=crop',
+      memberId: 'member-007',
+      memberName: 'Sneha Gupta'
     },
     {
       id: '3',
-      name: 'Coffee Subscription Box',
-      business: 'Bean & Brew Co.',
-      price: '₹1,499/month',
-      memberPrice: '₹1,199/month',
-      image: 'https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=400&h=300&fit=crop',
-      memberId: '2',
-      memberName: 'Rahul Sharma'
+      name: 'Corporate Catering',
+      business: 'FoodTech Labs',
+      price: '₹599/head',
+      memberPrice: '₹479/head',
+      image: 'https://images.unsplash.com/photo-1555244162-803834f70033?w=400&h=300&fit=crop',
+      memberId: 'member-007',
+      memberName: 'Sneha Gupta'
     }
   ]
 
   // People who might help
   const helpfulPeople = [
     {
-      id: '2',
-      name: 'Rahul Sharma',
-      role: 'Founder at Bean & Brew Co.',
-      expertise: 'Coffee expert, runs specialty coffee business',
-      avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop'
+      id: 'member-007',
+      name: 'Sneha Gupta',
+      role: 'Founder at FoodTech Labs',
+      expertise: 'Sustainable food delivery, ex-Swiggy product leader',
+      avatar: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=100&h=100&fit=crop'
     },
     {
-      id: '3',
-      name: 'Ananya Patel',
-      role: 'Food & Beverage Consultant',
-      expertise: 'Worked with 50+ cafes across India',
-      avatar: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&h=100&fit=crop'
+      id: 'member-003',
+      name: 'Ananya Krishnan',
+      role: 'CTO at HealthFirst',
+      expertise: 'Healthcare technology leader, 15 years experience',
+      avatar: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&h=100&fit=crop'
     },
     {
-      id: '5',
+      id: 'member-004',
       name: 'Vikram Singh',
-      role: 'Coffee Enthusiast',
-      expertise: 'Visited 200+ coffee shops, writes reviews',
+      role: 'Founder at FinLeap',
+      expertise: 'Fintech, financial inclusion for tier-2 & tier-3 towns',
       avatar: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop'
     }
   ]
