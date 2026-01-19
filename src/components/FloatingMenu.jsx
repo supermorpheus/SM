@@ -4,6 +4,10 @@ import '../styles/floatingMenu.css'
 function FloatingMenu() {
   const location = useLocation()
 
+  // Check if we're on a detail page (member or business)
+  const isDetailPage = location.pathname.startsWith('/member/') ||
+                       location.pathname.startsWith('/business/')
+
   const isActive = (path) => {
     if (path === '/dashboard') {
       return location.pathname === '/dashboard'
@@ -55,12 +59,13 @@ function FloatingMenu() {
   ]
 
   return (
-    <nav className="floating-dock">
+    <nav className={`floating-dock ${isDetailPage ? 'collapsed' : ''}`}>
       {menuItems.map((item) => (
         <Link
           key={item.path}
           to={item.path}
           className={`dock-item ${isActive(item.path) ? 'active' : ''}`}
+          title={isDetailPage ? item.label : undefined}
         >
           <span className="dock-icon">{item.icon}</span>
           <span className="dock-label">{item.label}</span>
