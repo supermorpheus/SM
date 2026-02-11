@@ -7,10 +7,14 @@ export const currentUser = {
   email: 'anu@supermorpheus.com',
   profilePicture: null,
   currentOrganization: 'Super Morpheus',
-  currentRole: 'Product Lead',
+  currentRole: 'Founder',
   livesIn: 'Bengaluru, India',
   introduction: 'Passionate about building products that make a difference. Love connecting with fellow entrepreneurs and sharing ideas.',
-  profileCompletion: 65,
+  inspiringQuote: '"Innovation distinguishes between a leader and a follower." - Steve Jobs',
+  joyOutsideWork: 'Reading, Hiking, Photography',
+  phone: '+91 98765 00001',
+  linkedin: 'https://linkedin.com/in/anugrah',
+  profileCompletion: 63,
   status: 'basic', // basic, active, super
   joinedDate: '2025-01-15'
 }
@@ -99,6 +103,34 @@ export const members = [
     introduction: 'Supply chain optimization expert. Making logistics smarter with AI.',
     status: 'super',
     tags: ['LogiTech', 'AI', 'Supply Chain']
+  },
+  {
+    id: 'member-007',
+    firstName: 'Sneha',
+    lastName: 'Gupta',
+    profilePicture: null,
+    currentOrganization: 'FoodTech Labs',
+    currentRole: 'Founder',
+    livesIn: 'Bengaluru, India',
+    email: 'sneha@foodtechlabs.in',
+    phone: '+91 98765 43216',
+    introduction: 'Revolutionizing how India eats. Building sustainable food delivery with farm-to-fork traceability.',
+    status: 'active',
+    tags: ['FoodTech', 'Sustainability', 'D2C']
+  },
+  {
+    id: 'member-008',
+    firstName: 'Karthik',
+    lastName: 'Rajan',
+    profilePicture: null,
+    currentOrganization: 'SpaceTech Ventures',
+    currentRole: 'CTO',
+    livesIn: 'Chennai, India',
+    email: 'karthik@spacetech.in',
+    phone: '+91 98765 43217',
+    introduction: 'Deep tech enthusiast building satellite-based solutions for agriculture and climate monitoring.',
+    status: 'super',
+    tags: ['SpaceTech', 'AgriTech', 'Deep Tech']
   }
 ]
 
